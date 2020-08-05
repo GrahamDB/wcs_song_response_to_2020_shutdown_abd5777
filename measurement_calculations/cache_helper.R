@@ -1,5 +1,5 @@
 
-master.data.dir <- "#FIXME dryad" # Point to remote directory containing LD831 excel sheets, dryad repo in this case
+master.data.dir <- "https://github.com/GrahamDB/WCS_Song_SLM_data/raw/master" # Point to remote directory containing LD831 excel sheets, github repo in this case
 local.data.dir <- "cache" # Point to local directory containing LD831 excel sheets
 
 data.file.path <- function(file.name) {
