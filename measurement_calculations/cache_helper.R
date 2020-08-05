@@ -99,7 +99,7 @@ if(file.exists("LD831_metadata.csv"))
   ld831.metadata<- read_ld831_metadata_cache()
 
 rebuild_ld831.metadata <- function(only.cache=TRUE){
-  scan.file.list <- read.csv("song_ld831_dryad_ref.csv", stringsAsFactors = F)[,"dryad_name"]
+  scan.file.list <- read.csv("song_ld831_ref.csv", stringsAsFactors = F)[,"file_name"]
   ld831.metadata<-collect_rec_summaries(scan.file.list, only.cache=only.cache)
   write_ld831_metadata(ld831.metadata)
   invisible(read_ld831_metadata_cache())
