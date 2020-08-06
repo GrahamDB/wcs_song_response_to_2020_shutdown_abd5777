@@ -19,8 +19,7 @@ is.cached <- function(file.name) {
 read_ld831_metadata_cache <- function() {
   read.csv(file = "LD831_metadata.csv", row.names = 1, 
            colClasses = c(fName = "factor", File.Name = "factor", Serial.Number = "factor", 
-                          Model = "factor", Firmware.Version = "factor", User = "factor", 
-                          Location = "factor", Start = "POSIXct", Stop = "POSIXct", 
+                          Model = "factor", Firmware.Version = "factor", Start = "POSIXct", Stop = "POSIXct", 
                           Duration = "numeric", Run.Time = "numeric", Pause = "numeric", 
                           Pre.Calibration = "POSIXct", Post.Calibration = "factor", 
                           Calibration.Deviation = "factor", RMS.Weight = "factor", 
@@ -32,23 +31,21 @@ read_ld831_metadata_cache <- function() {
                           LCeq = "numeric", LCeq...LAeq = "numeric", LAIeq = "numeric", 
                           LAIeq...LAeq = "numeric", X..Overloads = "numeric", Overload.Duration = "numeric", 
                           X..OBA.Overloads = "numeric", OBA.Overload.Duration = "numeric", 
-                          LAF66.60 = "numeric", LAF90.00 = "numeric", LAS66.60 = "numeric", 
-                          LAS90.00 = "numeric"))
+                          LAF66.60 = "numeric", LAF90.00 = "numeric"))
 }
 
 write_ld831_metadata <- function(use.data=ld831.metadata){
-  res<- matrix(character(1),ncol=44,nrow=nrow(use.data)+1)
+  res<- matrix(character(1),ncol=40,nrow=nrow(use.data)+1)
   res[,1][-1] <- as.character(use.data$File.Name)
   res[1,][-1] <- c("fName", "File.Name", "Serial.Number", 
-                   "Model", "Firmware.Version", "User", "Location", "Start", "Stop", 
+                   "Model", "Firmware.Version", "Start", "Stop", 
                    "Duration", "Run.Time", "Pause", "Pre.Calibration", "Post.Calibration", 
                    "Calibration.Deviation", "RMS.Weight", "Peak.Weight", "Detector", 
                    "Preamp", "Microphone.Correction", "Integration.Method", "OBA.Range", 
                    "OBA.Bandwidth", "OBA.Freq..Weighting", "OBA.Max.Spectrum", "Gain", 
                    "Overload", "LAeq", "LAE", "EA", "SEA", "LCeq", "LCeq...LAeq", 
                    "LAIeq", "LAIeq...LAeq", "X..Overloads", "Overload.Duration", 
-                   "X..OBA.Overloads", "OBA.Overload.Duration", "LAF66.60", "LAF90.00", 
-                   "LAS66.60", "LAS90.00")
+                   "X..OBA.Overloads", "OBA.Overload.Duration", "LAF66.60", "LAF90.00")
   colClasses = c(fName = "factor", File.Name = "factor", Serial.Number = "factor", 
                  Model = "factor", Firmware.Version = "factor", User = "factor", 
                  Location = "factor", Start = "POSIXct", Stop = "POSIXct", 
@@ -65,7 +62,7 @@ write_ld831_metadata <- function(use.data=ld831.metadata){
                  X..OBA.Overloads = "numeric", OBA.Overload.Duration = "numeric", 
                  LAF66.60 = "numeric", LAF90.00 = "numeric", LAS66.60 = "numeric", 
                  LAS90.00 = "numeric")
-  for(key in 1:43){
+  for(key in 1:(ncol(res)-1)){
     key.col=res[1,key+1]
     col.type=colClasses[key.col]
     if(col.type %in% c("POSIXct")){
@@ -91,7 +88,7 @@ write_ld831_metadata <- function(use.data=ld831.metadata){
   }
   
   write.table(res,file = "LD831_metadata.csv", col.names = FALSE, row.names=FALSE,
-              quote=1+which(colClasses %in% c("factor","POSIXct")),qmethod = "double",sep=",")
+              quote=1+which(colClasses[res[1,][-1]] %in% c("factor","POSIXct")),qmethod = "double",sep=",")
   invisible(res)
 }
 
