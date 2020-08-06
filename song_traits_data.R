@@ -1,8 +1,8 @@
 # song traits loader
-
+library(dplyr)
 
 source("site_information.R")
-use.sites <-c("ABLA", "COMW", "BATE", "BATW", "BABE", "LODU", "FWSC", "RICH" )
+use_sites <-c("ABLA", "COMW", "BATE", "BATW", "BABE", "LODU", "FWSC", "RICH" )
 
 song_obs  <- read.csv("song_traits_pub.csv") %>%
   mutate(location=factor(location, levels=use_sites),

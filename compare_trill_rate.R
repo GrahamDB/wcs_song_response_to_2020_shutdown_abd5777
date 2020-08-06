@@ -2,6 +2,7 @@ library(foreach)
 library(dplyr)
 library(nlme)
 source("song_traits_data.R")
+source("common.R")
 
 print.table(apply(with(song_obs,table(bird=bird,site=location,year=year)) >0,c(2:3),sum), zero.print=".")
 print.table(apply(with(song_obs,table(bird=bird,region=region,year=year)) >0,c(2:3),sum), zero.print="XXX")

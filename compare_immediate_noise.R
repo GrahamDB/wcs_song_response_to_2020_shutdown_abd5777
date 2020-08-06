@@ -8,14 +8,10 @@ library(AICcmodavg)
 source("site_information.R")
 source("common.R")
 
-SENEL.levels <- read.csv(file="song_amplitude.csv", row.names = 1) %>%
+SENEL.levels <- read.csv(file="song_amplitude_pub.csv", row.names = 1) %>%
   tibble::rownames_to_column()
-song.levels <- SENEL.levels %>% 
-  filter(!is.na(distance), !is.na(ambient.LAeq)) %>% 
-  mutate(ambient.LAeq2 =ambient.LAeq^2)
-noise.5sec.levels <- SENEL.levels %>% 
-  rename(ambient_10sec.LAeq =ambient.LAeq,ambient.LAeq =ambient_5sec.LAeq) %>%
-  filter( !is.na(ambient.LAeq)) %>% 
+song.levels <- SENEL.levels %>%
+  filter(!is.na(distance), !is.na(ambient.LAeq)) %>%
   mutate(ambient.LAeq2 =ambient.LAeq^2)
 noise.10sec.levels <- SENEL.levels %>% 
   filter( !is.na(ambient.LAeq)) %>% 
@@ -58,7 +54,7 @@ print(aictab(me_song_only <- me_model_set(quote(song.levels))))
 
 print(aictab(me_noise_10s <- me_model_set(quote(noise.10sec.levels), include.dist = F)))
 
-print(aictab(me_noise_5s <- me_model_set(quote(noise.5sec.levels), include.dist = F)))
+# print(aictab(me_noise_5s <- me_model_set(quote(noise.5sec.levels), include.dist = F)))
 
 adv_importance <- function(model.set, parameter, model.tab=aictab(model.set), verbose=TRUE){
   all.parm = unique(unlist(lapply(model.set, function(m) names(coef(m)))))[-1]
@@ -107,8 +103,6 @@ cat("\n\nParameter importance: \n")
 print(sapply(c("year","distance","region"), function(p) adv_importance(me_song_only, p)))
 
 print(sapply(c("year","region"), function(p) adv_importance(me_noise_10s, p)))
-
-print(sapply(c("year","region"), function(p) adv_importance(me_noise_5s, p)))
 
 
 # random effect based on segment, not territory?
