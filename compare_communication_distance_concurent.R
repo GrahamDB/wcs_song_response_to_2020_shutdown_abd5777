@@ -2,6 +2,7 @@
 
 song_audibility <- read.csv(file="song_audibility.csv")
 library(nlme)
+library(dplyr)
 comm_data <- song_audibility %>% 
   mutate(discr_log=20*log10(max_range), 
          detect_log=discr_log+3) %>% 
