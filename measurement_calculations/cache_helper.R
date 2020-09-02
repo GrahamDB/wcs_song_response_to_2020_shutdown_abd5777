@@ -17,7 +17,7 @@ is.cached <- function(file.name) {
 
 
 read_ld831_metadata_cache <- function() {
-  read.csv(file = "LD831_metadata.csv", row.names = 1, 
+  read.csv(file = "measurement_calculations/LD831_metadata.csv", row.names = 1, 
            colClasses = c(fName = "factor", File.Name = "factor", Serial.Number = "factor", 
                           Model = "factor", Firmware.Version = "factor", Start = "POSIXct", Stop = "POSIXct", 
                           Duration = "numeric", Run.Time = "numeric", Pause = "numeric", 
@@ -87,12 +87,12 @@ write_ld831_metadata <- function(use.data=ld831.metadata){
     }
   }
   
-  write.table(res,file = "LD831_metadata.csv", col.names = FALSE, row.names=FALSE,
+  write.table(res,file = "measurement_calculations/LD831_metadata.csv", col.names = FALSE, row.names=FALSE,
               quote=1+which(colClasses[res[1,][-1]] %in% c("factor","POSIXct")),qmethod = "double",sep=",")
   invisible(res)
 }
 
-if(file.exists("LD831_metadata.csv"))
+if(file.exists("measurement_calculations/LD831_metadata.csv"))
   ld831.metadata<- read_ld831_metadata_cache()
 
 rebuild_ld831.metadata <- function(only.cache=TRUE){
