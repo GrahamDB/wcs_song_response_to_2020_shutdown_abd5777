@@ -1,7 +1,7 @@
 library(dplyr)
 source("site_information.R")
 source("common.R");
-tr_ambient_LAeq <- read.csv("territory_noise_pub.csv", row.names = 1) %>% tibble::rownames_to_column()
+tr_ambient_LAeq <- read.csv("internal_data/territory_noise_pub.csv", row.names = 1) %>% tibble::rownames_to_column()
 tr_ambient_LAF90 <- tr_ambient_LAeq %>% filter(!is.na(LAF90))
 
 

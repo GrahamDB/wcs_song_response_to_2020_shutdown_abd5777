@@ -5,7 +5,7 @@ library(ggplot2)
 source("site_information.R")
 source("common.R");
 
-song.snr.v2 <-  read.csv(file="song_amplitude_pub.csv", row.names = 1) %>%
+song.snr.v2 <-  read.csv(file="internal_data/song_amplitude_pub.csv", row.names = 1) %>%
   tibble::rownames_to_column()
 song.levels <- song.snr.v2
 song.amb.levels <- song.snr.v2 %>% filter(!is.na(ambient.LAeq))

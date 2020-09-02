@@ -38,4 +38,4 @@ amp_cols[!amp_cols %in% names(song.snr.v2)]
 song.amp.out <- song.snr.v2 %>%  mutate(dialect = dialect.from.site(location))
 song.amp.out[,amp_cols] %>%
   mutate_if(is.numeric,~round(.,digits=3)) %>%
-  tibble::column_to_rownames("rowname") %>% write.csv(file="song_amplitude_pub.csv")
+  tibble::column_to_rownames("rowname") %>% write.csv(file="internal_data/song_amplitude_pub.csv")

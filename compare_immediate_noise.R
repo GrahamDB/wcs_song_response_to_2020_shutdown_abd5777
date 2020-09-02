@@ -8,7 +8,7 @@ library(AICcmodavg)
 source("site_information.R")
 source("common.R")
 
-SENEL.levels <- read.csv(file="song_amplitude_pub.csv", row.names = 1) %>%
+SENEL.levels <- read.csv(file="internal_data/song_amplitude_pub.csv", row.names = 1) %>%
   tibble::rownames_to_column()
 song.levels <- SENEL.levels %>%
   filter(!is.na(distance), !is.na(ambient.LAeq)) %>%

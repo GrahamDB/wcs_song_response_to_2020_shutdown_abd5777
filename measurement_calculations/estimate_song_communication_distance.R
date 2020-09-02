@@ -67,7 +67,7 @@ combo_data= comm_data %>%
   inner_join(distort_data_sF)
 
 combo_data %>% rename(bird=bird.id) %>% 
-  inner_join(read.csv("song_amplitude_pub.csv") %>% 
+  inner_join(read.csv("internal_data/song_amplitude_pub.csv") %>% 
                select(song.id,bird.id,dialect,region,year ) ) %>%
   select(song.id,bird.id,location,dialect,region,year,
          distance,peak_LZeq.band,
@@ -77,5 +77,5 @@ combo_data %>% rename(bird=bird.id) %>%
          r.F.p75,r.F.p50,r.F.p25,
          s.F.p75,s.F.p50,s.F.p25) %>%
   mutate_if(is.numeric,~round(.,digits = 3))%>%
-  write.csv(file="song_audibility.csv", row.names=F)
+  write.csv(file="internal_data/song_audibility.csv", row.names=F)
 
